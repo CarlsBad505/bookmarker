@@ -6,15 +6,6 @@ const newLinkForm = document.querySelector('.new-link-form');
 const newLinkUrl = document.querySelector('.new-link-url');
 const newLinkSubmit = document.querySelector('.new-link-submit');
 const clearStorageButton = document.querySelector('.clear-storage');
-const clearForm = function() {
-  newLinkUrl.value = null;
-}
-const parseResponse = function(text) {
-  return parser.parseFromString(text, 'text/html');
-}
-const findTitle = function(nodes) {
-  return nodes.querySelector('title').innerText;
-}
 
 newLinkUrl.addEventListener('keyup', function() {
   newLinkSubmit.disabled = !newLinkUrl.validity.valid;
@@ -45,6 +36,18 @@ linksSection.addEventListener('click', function(event) {
     shell.openExternal(event.target.href);
   }
 });
+
+function clearForm() {
+  newLinkUrl.value = null;
+}
+
+function parseResponse(text) {
+  return parser.parseFromString(text, 'text/html');
+}
+
+function findTitle(nodes) {
+  return nodes.querySelector('title').innerText;
+}
 
 function storeLink(title, url) {
   localStorage.setItem(url, JSON.stringify({ title: title, url: url }));
